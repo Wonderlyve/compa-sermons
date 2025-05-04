@@ -45,20 +45,21 @@ export default function SermonCarousel({
             <CarouselItem key={sermon.id}>
               <Link 
                 to={`/sermon/${sermon.id}`}
-                className="glass-card rounded-xl p-4 flex gap-4"
+                className="glass-card rounded-xl p-0 block overflow-hidden relative"
               >
-                <div className="relative w-1/3 min-w-[120px] aspect-square">
+                <div className="relative w-full aspect-video">
                   <img
                     src={sermon.imageUrl}
                     alt={sermon.title}
-                    className="w-full h-full object-cover rounded-md"
+                    className="w-full h-full object-cover"
                   />
-                </div>
-                <div className="flex-1 flex flex-col justify-center">
-                  <h3 className="text-xl font-semibold text-white mb-2">{sermon.title}</h3>
-                  <div className="w-3/4 h-2 bg-compa-600 rounded-full mb-4"></div>
-                  <div className="absolute right-6 bottom-1/2 translate-y-1/2">
-                    <button className="w-12 h-12 bg-compa-500 rounded-full flex items-center justify-center">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 p-4 w-full">
+                    <h3 className="text-xl font-semibold text-white mb-1">{sermon.title}</h3>
+                    <p className="text-gray-300">{sermon.preacher}</p>
+                  </div>
+                  <div className="absolute right-4 bottom-4">
+                    <button className="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center">
                       <Play size={20} className="text-white ml-1" />
                     </button>
                   </div>
@@ -73,7 +74,7 @@ export default function SermonCarousel({
           <button
             key={index}
             className={`w-2 h-2 rounded-full transition-colors ${
-              index === current - 1 ? "bg-compa-500" : "bg-compa-700"
+              index === current - 1 ? "bg-red-500" : "bg-compa-700"
             }`}
             onClick={() => api?.scrollTo(index)}
           />

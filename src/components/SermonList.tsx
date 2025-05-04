@@ -27,9 +27,8 @@ const SermonList = ({ sermons }: SermonListProps) => {
           <div className="flex-1 min-w-0">
             <h3 className="font-medium text-white line-clamp-1">{sermon.title}</h3>
             <p className="text-sm text-gray-400">{sermon.preacher}</p>
-            <div className="w-2/3 h-1.5 bg-compa-600 rounded-full mt-2"></div>
           </div>
-          <div className="w-12 h-12 bg-compa-500 rounded-full flex items-center justify-center flex-shrink-0">
+          <div className="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0">
             <Play size={20} className="text-white ml-1" />
           </div>
         </Link>

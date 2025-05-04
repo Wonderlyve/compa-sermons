@@ -1,6 +1,7 @@
 
 import React from 'react';
 import BottomNavigation from './BottomNavigation';
+import Header from './Header';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -17,7 +18,10 @@ const Layout = ({
 }: LayoutProps) => {
   return (
     <div className={`min-h-screen bg-compa-800 ${className}`}>
-      <main className={`${withPadding ? 'px-4 py-6' : ''} ${withBottomNavPadding ? 'pb-24' : ''}`}>
+      <div className={`${withPadding ? 'px-4' : ''}`}>
+        <Header />
+      </div>
+      <main className={`${withPadding ? 'px-4 py-3' : ''} ${withBottomNavPadding ? 'pb-24' : ''}`}>
         {children}
       </main>
       <BottomNavigation />
