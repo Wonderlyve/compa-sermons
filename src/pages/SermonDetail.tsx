@@ -1,16 +1,26 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import AudioPlayer from '@/components/AudioPlayer';
 import SermonCarousel from '@/components/SermonCarousel';
 import { ArrowLeft } from 'lucide-react';
 import { getAllSermons, getSermonById, getRelatedSermons } from '@/data/sermons';
+import { useSermon } from '@/context/SermonContext';
 
 const SermonDetail = () => {
   const { id } = useParams<{ id: string }>();
   const sermon = getSermonById(id || '');
   const relatedSermons = getRelatedSermons(id || '');
+  const { setCurrentSermon, setIsPlaying } = useSermon();
+  
+  useEffect(() => {
+    if (sermon) {
+      // Update the current sermon but don't autoplay
+      setCurrentSermon(sermon);
+      setIsPlaying(false);
+    }
+  }, [id, sermon, setCurrentSermon, setIsPlaying]);
   
   if (!sermon) {
     return (
@@ -56,6 +66,7 @@ const SermonDetail = () => {
           src={sermon.audioUrl || ''}
           title={sermon.title}
           preacher={sermon.preacher}
+          sermonId={sermon.id}
           imageUrl={sermon.imageUrl}
         />
         

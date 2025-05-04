@@ -1,12 +1,15 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Play, Pause, Volume2, VolumeX, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, ArrowLeft, ArrowRight, Share, Download, Heart } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useSermon } from '@/context/SermonContext';
+import { toast } from "@/components/ui/use-toast";
 
 interface AudioPlayerProps {
   src: string;
   title: string;
   preacher: string;
+  sermonId: string;
   imageUrl?: string;
   mini?: boolean;
   className?: string;
@@ -15,7 +18,8 @@ interface AudioPlayerProps {
 const AudioPlayer = ({ 
   src, 
   title, 
-  preacher, 
+  preacher,
+  sermonId,
   imageUrl, 
   mini = false,
   className 
@@ -26,6 +30,7 @@ const AudioPlayer = ({
   const [currentTime, setCurrentTime] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
+  const { toggleFavorite, isFavorite } = useSermon();
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -97,6 +102,44 @@ const AudioPlayer = ({
     }
   };
 
+  // Share sermon
+  const handleShare = async () => {
+    const shareData = {
+      title: `Compa - ${title}`,
+      text: `Écoute "${title}" par ${preacher} sur Compa`,
+      url: window.location.href
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(window.location.href);
+        toast({
+          title: "Lien copié",
+          description: "Le lien a été copié dans le presse-papiers."
+        });
+      }
+    } catch (err) {
+      console.error("Error sharing:", err);
+    }
+  };
+
+  // Download sermon
+  const handleDownload = () => {
+    const link = document.createElement('a');
+    link.href = src;
+    link.download = `${title} - ${preacher}.mp3`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    toast({
+      title: "Téléchargement démarré",
+      description: "Le sermon commence à se télécharger."
+    });
+  };
+
   if (mini) {
     return (
       <div className={cn("fixed bottom-16 left-0 right-0 z-40 bg-compa-900/95 backdrop-blur-md border-t border-compa-700/50 p-3", className)}>
@@ -141,10 +184,23 @@ const AudioPlayer = ({
           />
         )}
         
-        <div>
+        <div className="flex-1">
           <h3 className="font-medium text-white">{title}</h3>
           <p className="text-sm text-gray-300">{preacher}</p>
         </div>
+
+        <button
+          onClick={() => toggleFavorite(sermonId)}
+          className="w-10 h-10 bg-compa-700/60 rounded-full flex items-center justify-center mr-2"
+        >
+          <Heart
+            size={20}
+            className={cn(
+              "transition-colors duration-200",
+              isFavorite(sermonId) ? "fill-red-500 text-red-500" : "text-white"
+            )}
+          />
+        </button>
       </div>
       
       <div
@@ -190,7 +246,25 @@ const AudioPlayer = ({
         </button>
       </div>
       
-      <div className="flex justify-end mt-4">
+      <div className="flex justify-between items-center mt-4">
+        <div className="flex space-x-4">
+          <button
+            onClick={handleShare}
+            className="text-gray-400 hover:text-white flex items-center"
+          >
+            <Share size={18} className="mr-1" />
+            <span className="text-sm">Partager</span>
+          </button>
+          
+          <button
+            onClick={handleDownload}
+            className="text-gray-400 hover:text-white flex items-center"
+          >
+            <Download size={18} className="mr-1" />
+            <span className="text-sm">Télécharger</span>
+          </button>
+        </div>
+        
         <button
           onClick={toggleMute}
           className="text-gray-400 hover:text-white"

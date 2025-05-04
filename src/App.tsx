@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/context/AuthContext";
+import { SermonProvider } from "@/context/SermonContext";
 
 import Home from "@/pages/Home";
 import Categories from "@/pages/Categories";
@@ -16,36 +17,42 @@ import NotFound from "@/pages/NotFound";
 import Programme from "@/pages/Programme";
 import Login from "@/pages/Login";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import Sermons from "@/pages/Sermons";
+import Favorites from "@/pages/Favorites";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
-      <TooltipProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/categories" element={<Categories />} />
-            <Route path="/categories/:id" element={<CategoryDetail />} />
-            <Route path="/radio" element={<Radio />} />
-            <Route path="/sermon/:id" element={<SermonDetail />} />
-            <Route path="/programme" element={<Programme />} />
-            <Route path="/login" element={<Login />} />
-            <Route 
-              path="/dashboard" 
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              } 
-            />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-        <Toaster />
-        <Sonner />
-      </TooltipProvider>
+      <SermonProvider>
+        <TooltipProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/categories" element={<Categories />} />
+              <Route path="/categories/:id" element={<CategoryDetail />} />
+              <Route path="/radio" element={<Radio />} />
+              <Route path="/sermon/:id" element={<SermonDetail />} />
+              <Route path="/programme" element={<Programme />} />
+              <Route path="/sermons" element={<Sermons />} />
+              <Route path="/favorites" element={<Favorites />} />
+              <Route path="/login" element={<Login />} />
+              <Route 
+                path="/dashboard" 
+                element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+          <Toaster />
+          <Sonner />
+        </TooltipProvider>
+      </SermonProvider>
     </AuthProvider>
   </QueryClientProvider>
 );

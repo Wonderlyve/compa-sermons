@@ -1,8 +1,10 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Play } from 'lucide-react';
+import { Play, Heart } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useSermon } from '@/context/SermonContext';
+import { getSermonById } from '@/data/sermons';
 
 interface SermonCardProps {
   id: string;
@@ -23,6 +25,22 @@ const SermonCard = ({
   category,
   className 
 }: SermonCardProps) => {
+  const { setCurrentSermon, setIsPlaying, toggleFavorite, isFavorite } = useSermon();
+  
+  const handlePlayClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const sermon = getSermonById(id);
+    if (sermon) {
+      setCurrentSermon(sermon);
+      setIsPlaying(true);
+    }
+  };
+
+  const handleFavoriteClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    toggleFavorite(id);
+  };
+
   return (
     <Link 
       to={`/sermon/${id}`} 
@@ -48,12 +66,22 @@ const SermonCard = ({
       
       <button 
         className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-compa-500/90 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        onClick={(e) => {
-          e.preventDefault();
-          // Play functionality will be added later
-        }}
+        onClick={handlePlayClick}
       >
         <Play size={20} className="text-white ml-1" />
+      </button>
+      
+      <button
+        className="absolute top-3 right-3 z-20 w-8 h-8 bg-compa-700/60 rounded-full flex items-center justify-center transition-all duration-200"
+        onClick={handleFavoriteClick}
+      >
+        <Heart
+          size={16}
+          className={cn(
+            "transition-colors duration-200",
+            isFavorite(id) ? "fill-red-500 text-red-500" : "text-white"
+          )}
+        />
       </button>
       
       <div className="mt-auto p-4 z-20">

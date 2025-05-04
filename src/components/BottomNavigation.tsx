@@ -1,13 +1,8 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, LayoutGrid, Radio, Calendar, Menu } from 'lucide-react';
+import { Home, LayoutGrid, Radio, Calendar, Menu, List } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
-import { 
-  Sheet, 
-  SheetContent, 
-  SheetTrigger 
-} from "@/components/ui/sheet";
 
 const BottomNavigation = () => {
   const location = useLocation();
@@ -27,6 +22,11 @@ const BottomNavigation = () => {
       path: '/categories',
       label: 'Catégories',
       icon: LayoutGrid,
+    },
+    {
+      path: '/sermons',
+      label: 'Sermons',
+      icon: List,
     },
     {
       path: '/programme',
