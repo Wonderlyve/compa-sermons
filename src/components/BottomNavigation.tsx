@@ -1,54 +1,57 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Radio, List } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { Home, LayoutGrid, Radio, Settings } from 'lucide-react';
 
 const BottomNavigation = () => {
   const location = useLocation();
-  const path = location.pathname;
-
+  
+  const isActive = (path: string) => {
+    return location.pathname === path;
+  };
+  
   const navItems = [
     {
-      name: "Accueil",
-      path: "/",
+      path: '/',
+      label: 'Accueil',
       icon: Home,
     },
     {
-      name: "Catégories",
-      path: "/categories",
-      icon: List,
+      path: '/categories',
+      label: 'Catégories',
+      icon: LayoutGrid,
     },
     {
-      name: "Radio",
-      path: "/radio",
+      path: '/radio',
+      label: 'Radio',
       icon: Radio,
     },
+    {
+      path: '/dashboard',
+      label: 'Admin',
+      icon: Settings,
+    },
   ];
-
+  
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-compa-900/90 backdrop-blur-lg border-t border-compa-700/30">
-      <div className="flex items-center justify-around p-3">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-compa-900/90 backdrop-blur-lg border-t border-compa-700/50 shadow-lg">
+      <div className="flex items-center justify-around">
         {navItems.map((item) => (
           <Link
             key={item.path}
             to={item.path}
-            className={cn(
-              "flex flex-col items-center justify-center py-1 px-5 transition-all duration-200",
-              path === item.path 
-                ? "text-compa-400"
-                : "text-gray-400 hover:text-compa-400/70"
-            )}
+            className={`flex flex-col items-center justify-center py-3 px-2 transition-colors ${
+              isActive(item.path)
+                ? 'text-compa-400'
+                : 'text-gray-500 hover:text-gray-300'
+            }`}
           >
-            <item.icon size={22} className={cn(
-              "mb-1 transition-all",
-              path === item.path ? "text-compa-400" : "text-gray-400"
-            )} />
-            <span className="text-xs font-medium">{item.name}</span>
+            <item.icon size={20} className="mb-1" />
+            <span className="text-xs">{item.label}</span>
           </Link>
         ))}
       </div>
-    </div>
+    </nav>
   );
 };
 

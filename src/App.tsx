@@ -10,6 +10,7 @@ import Categories from "@/pages/Categories";
 import CategoryDetail from "@/pages/CategoryDetail";
 import Radio from "@/pages/Radio";
 import SermonDetail from "@/pages/SermonDetail";
+import Dashboard from "@/pages/Dashboard";
 import NotFound from "@/pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/categories/:id" element={<CategoryDetail />} />
           <Route path="/radio" element={<Radio />} />
           <Route path="/sermon/:id" element={<SermonDetail />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
