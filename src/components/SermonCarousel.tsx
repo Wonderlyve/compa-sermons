@@ -55,7 +55,7 @@ export default function SermonCarousel({
 
   return (
     <div>
-      {title && <h2 className="text-2xl font-semibold text-white mb-4">{title}</h2>}
+      {title && <h2 className="text-xl font-semibold text-white mb-3">{title}</h2>}
       <Carousel setApi={setApi} className="w-full">
         <CarouselContent>
           {sermons.map((sermon) => (
@@ -65,44 +65,61 @@ export default function SermonCarousel({
                 className="rounded-xl block overflow-hidden relative"
               >
                 <div className="flex flex-col">
-                  {/* Image Section - Reduced height for homepage */}
-                  <div className={`relative w-full ${isHomePage ? 'aspect-[16/9]' : 'aspect-video'}`}>
+                  {/* Image Section - Fixed height and aspect ratio for homepage */}
+                  <div className={`relative w-full ${isHomePage ? 'h-[180px] aspect-[21/9]' : 'aspect-video'}`}>
                     <img
                       src={sermon.imageUrl}
                       alt={sermon.title}
                       className="w-full h-full object-cover"
                     />
                     
-                    {/* Play button overlay for homepage only */}
+                    {/* Play and Favorite buttons for homepage only */}
                     {isHomePage && (
-                      <button
-                        className="absolute bottom-4 right-4 bg-white/90 rounded-full p-2 shadow-lg"
-                        onClick={(e) => handlePlayClick(e, sermon)}
-                      >
-                        <Play size={20} className="text-purple-600 fill-purple-600" />
-                      </button>
+                      <div className="absolute bottom-4 right-4 flex items-center space-x-2">
+                        <button
+                          className="bg-white/90 rounded-full p-2 shadow-lg"
+                          onClick={(e) => handleFavoriteClick(e, sermon)}
+                        >
+                          <Heart
+                            size={18}
+                            className={cn(
+                              "transition-colors duration-200",
+                              isFavorite(sermon.id) ? "fill-red-500 text-red-500" : "text-gray-700"
+                            )}
+                          />
+                        </button>
+                        <button
+                          className="bg-white/90 rounded-full p-2 shadow-lg"
+                          onClick={(e) => handlePlayClick(e, sermon)}
+                        >
+                          <Play size={18} className="text-purple-600 fill-purple-600 ml-0.5" />
+                        </button>
+                      </div>
                     )}
                   </div>
                   
-                  {/* Text Section */}
-                  <div className="bg-white p-4 rounded-b-xl">
+                  {/* Text Section with updated colors */}
+                  <div className="bg-[#0C233F] p-3 rounded-b-xl">
                     <div className="flex justify-between items-start">
                       <div className="flex-1">
-                        <h3 className="text-xl font-semibold text-gray-900">{sermon.title}</h3>
-                        <p className="text-gray-700">{sermon.preacher}</p>
+                        <h3 className="text-base font-semibold text-white line-clamp-1">{sermon.title}</h3>
+                        <p className="text-xs text-compa-300">{sermon.preacher}</p>
                       </div>
-                      <button
-                        className="ml-2"
-                        onClick={(e) => handleFavoriteClick(e, sermon)}
-                      >
-                        <Heart
-                          size={24}
-                          className={cn(
-                            "transition-colors duration-200",
-                            isFavorite(sermon.id) ? "fill-red-500 text-red-500" : "text-gray-400"
-                          )}
-                        />
-                      </button>
+                      
+                      {!isHomePage && (
+                        <button
+                          className="ml-2"
+                          onClick={(e) => handleFavoriteClick(e, sermon)}
+                        >
+                          <Heart
+                            size={20}
+                            className={cn(
+                              "transition-colors duration-200",
+                              isFavorite(sermon.id) ? "fill-red-500 text-red-500" : "text-gray-400"
+                            )}
+                          />
+                        </button>
+                      )}
                     </div>
                     
                     {/* Show Listen button only on non-homepage */}
@@ -111,8 +128,8 @@ export default function SermonCarousel({
                         className="mt-3 w-full bg-purple-600 text-white py-2 rounded-full flex items-center justify-center gap-2"
                         onClick={(e) => handlePlayClick(e, sermon)}
                       >
-                        <Play size={20} className="ml-1" />
-                        <span>Écouter</span>
+                        <Play size={18} className="ml-1" />
+                        <span className="text-sm">Écouter</span>
                       </button>
                     )}
                   </div>
@@ -122,11 +139,11 @@ export default function SermonCarousel({
           ))}
         </CarouselContent>
       </Carousel>
-      <div className="flex justify-center gap-2 mt-4">
+      <div className="flex justify-center gap-1.5 mt-2">
         {Array.from({ length: count }).map((_, index) => (
           <button
             key={index}
-            className={`w-2 h-2 rounded-full transition-colors ${
+            className={`w-1.5 h-1.5 rounded-full transition-colors ${
               index === current - 1 ? "bg-red-500" : "bg-compa-700"
             }`}
             onClick={() => api?.scrollTo(index)}

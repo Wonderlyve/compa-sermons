@@ -14,7 +14,7 @@ const Radio = () => {
         <RadioPlayer 
           streamUrl="https://stream.radio.co/s5c5da6a36/listen"
           title="Compa Radio"
-          // Removing the coverImage prop as it doesn't exist in RadioPlayerProps
+          imageUrl="/placeholder.svg"  // Adding required imageUrl prop
         />
       </div>
       

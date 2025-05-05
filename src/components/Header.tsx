@@ -17,9 +17,9 @@ const Header = () => {
   const { user, logout, isAuthenticated } = useAuth();
 
   return (
-    <div className="flex justify-between items-center pt-3 pb-3">
+    <div className="flex justify-between items-center pt-2 pb-2">
       <div>
-        <h1 className="text-4xl font-bold text-white">Compa</h1>
+        <h1 className="text-3xl font-bold text-white">Compa</h1>
       </div>
       <div className="flex items-center space-x-3">
         <div className="relative">
@@ -29,7 +29,7 @@ const Header = () => {
           </span>
         </div>
         <Link to="/profile">
-          <Avatar className="h-9 w-9 border border-compa-600">
+          <Avatar className="h-8 w-8 border border-compa-600">
             <AvatarImage src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=64&h=64&dpr=2&q=80" />
             <AvatarFallback>UN</AvatarFallback>
           </Avatar>
@@ -37,7 +37,7 @@ const Header = () => {
         
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" className="text-white">
+            <Button variant="ghost" size="icon" className="text-white h-8 w-8 p-1.5">
               <Menu className="h-5 w-5" />
             </Button>
           </SheetTrigger>

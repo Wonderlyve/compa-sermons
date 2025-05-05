@@ -19,38 +19,38 @@ const categories = [
 const Home = () => {
   return (
     <Layout>
-      <div className="relative mb-6">
+      <div className="relative mb-4">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
         <Input 
           placeholder="Rechercher un sermon..." 
-          className="pl-10 bg-compa-700 border-compa-600 text-gray-300 placeholder:text-gray-400"
+          className="pl-10 bg-gray-800 border-gray-700 text-gray-300 placeholder:text-gray-400"
         />
       </div>
 
-      <div className="flex gap-2 overflow-x-auto mb-6 no-scrollbar">
+      <div className="flex gap-2 overflow-x-auto mb-4 no-scrollbar scrollbar-hide">
         {categories.map((category) => (
           <Link
             key={category.slug}
             to={`/categories/${category.slug}`}
-            className="bg-compa-700 text-white px-4 py-2 rounded-full text-sm whitespace-nowrap"
+            className="bg-gray-800 text-white px-3 py-1.5 rounded-full text-xs whitespace-nowrap"
           >
             {category.name}
           </Link>
         ))}
       </div>
 
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold text-white mb-4">À découvrir</h2>
+      <section className="mb-6">
+        <h2 className="text-xl font-semibold text-white mb-3">À découvrir</h2>
         <SermonCarousel 
           sermons={featuredSermons}
         />
       </section>
 
-      <section className="mb-10">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-semibold text-white">Sermons récents</h2>
+      <section className="mb-6">
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-xl font-semibold text-white">Sermons récents</h2>
           <Link to="/sermons">
-            <Button variant="ghost" size="sm" className="text-gray-400 hover:text-white">
+            <Button variant="ghost" size="sm" className="text-gray-400 hover:text-white text-xs py-1 h-auto">
               Voir tout
             </Button>
           </Link>

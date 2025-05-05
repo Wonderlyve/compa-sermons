@@ -29,7 +29,7 @@ const Layout = ({
           <Header />
         </div>
       )}
-      <main className={`${withPadding ? 'px-4 py-3' : ''} ${withBottomNavPadding ? 'pb-24' : ''}${currentSermon ? ' pb-40' : ''}`}>
+      <main className={`${withPadding ? 'px-4 py-2' : ''} ${withBottomNavPadding ? 'pb-20' : ''}${currentSermon ? ' pb-36' : ''}`}>
         {children}
       </main>
       {currentSermon && <MiniPlayer />}
