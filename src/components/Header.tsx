@@ -58,6 +58,12 @@ const Header = () => {
               >
                 Mes Favoris
               </Link>
+              <Link 
+                to="/settings" 
+                className="block py-2 px-3 hover:bg-compa-700 rounded-md transition-colors"
+              >
+                Réglages
+              </Link>
               {user?.isAdmin && (
                 <Link 
                   to="/dashboard" 
@@ -100,6 +106,12 @@ const Header = () => {
                 className="block py-2 px-3 hover:bg-compa-700 rounded-md transition-colors"
               >
                 Radio en direct
+              </Link>
+              <Link 
+                to="/daily-bread" 
+                className="block py-2 px-3 hover:bg-compa-700 rounded-md transition-colors"
+              >
+                Pain du Jour
               </Link>
             </div>
           </SheetContent>

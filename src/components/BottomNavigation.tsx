@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, LayoutGrid, Radio, Calendar, Menu, List } from 'lucide-react';
+import { Home, LayoutGrid, Radio, Calendar, BookOpenText } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
 const BottomNavigation = () => {
@@ -24,9 +24,9 @@ const BottomNavigation = () => {
       icon: LayoutGrid,
     },
     {
-      path: '/sermons',
-      label: 'Sermons',
-      icon: List,
+      path: '/daily-bread',
+      label: 'Pain du jour',
+      icon: BookOpenText,
     },
     {
       path: '/programme',

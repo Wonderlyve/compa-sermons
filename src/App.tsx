@@ -20,6 +20,8 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import Sermons from "@/pages/Sermons";
 import Favorites from "@/pages/Favorites";
 import Profile from "@/pages/Profile";
+import Settings from "@/pages/Settings";
+import DailyBread from "@/pages/DailyBread";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +41,8 @@ const App = () => (
               <Route path="/sermons" element={<Sermons />} />
               <Route path="/favorites" element={<Favorites />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/daily-bread" element={<DailyBread />} />
               <Route path="/login" element={<Login />} />
               <Route 
                 path="/dashboard" 

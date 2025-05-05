@@ -14,8 +14,7 @@ const Radio = () => {
         <RadioPlayer 
           streamUrl="https://stream.radio.co/s5c5da6a36/listen"
           title="Compa Radio"
-          // The subtitle prop is removed as it doesn't exist in RadioPlayerProps
-          coverImage="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&q=80&w=800"
+          // Removing the coverImage prop as it doesn't exist in RadioPlayerProps
         />
       </div>
       

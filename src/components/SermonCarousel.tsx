@@ -6,7 +6,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { Sermon } from "@/data/sermons";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Play, Heart } from "lucide-react";
 import { useSermon } from "@/context/SermonContext";
 import { cn } from "@/lib/utils";
@@ -26,6 +26,8 @@ export default function SermonCarousel({
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);
   const { setCurrentSermon, setIsPlaying, toggleFavorite, isFavorite } = useSermon();
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   React.useEffect(() => {
     if (!api) {
@@ -63,13 +65,23 @@ export default function SermonCarousel({
                 className="rounded-xl block overflow-hidden relative"
               >
                 <div className="flex flex-col">
-                  {/* Image Section */}
-                  <div className="relative w-full aspect-video">
+                  {/* Image Section - Reduced height for homepage */}
+                  <div className={`relative w-full ${isHomePage ? 'aspect-[16/9]' : 'aspect-video'}`}>
                     <img
                       src={sermon.imageUrl}
                       alt={sermon.title}
                       className="w-full h-full object-cover"
                     />
+                    
+                    {/* Play button overlay for homepage only */}
+                    {isHomePage && (
+                      <button
+                        className="absolute bottom-4 right-4 bg-white/90 rounded-full p-2 shadow-lg"
+                        onClick={(e) => handlePlayClick(e, sermon)}
+                      >
+                        <Play size={20} className="text-purple-600 fill-purple-600" />
+                      </button>
+                    )}
                   </div>
                   
                   {/* Text Section */}
@@ -92,13 +104,17 @@ export default function SermonCarousel({
                         />
                       </button>
                     </div>
-                    <button 
-                      className="mt-3 w-full bg-purple-600 text-white py-2 rounded-full flex items-center justify-center gap-2"
-                      onClick={(e) => handlePlayClick(e, sermon)}
-                    >
-                      <Play size={20} className="ml-1" />
-                      <span>Écouter</span>
-                    </button>
+                    
+                    {/* Show Listen button only on non-homepage */}
+                    {!isHomePage && (
+                      <button 
+                        className="mt-3 w-full bg-purple-600 text-white py-2 rounded-full flex items-center justify-center gap-2"
+                        onClick={(e) => handlePlayClick(e, sermon)}
+                      >
+                        <Play size={20} className="ml-1" />
+                        <span>Écouter</span>
+                      </button>
+                    )}
                   </div>
                 </div>
               </Link>
