@@ -4,13 +4,12 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Sermon } from "@/data/sermons";
 import { Link } from "react-router-dom";
-import { Play } from "lucide-react";
+import { Play, Heart } from "lucide-react";
 import { useSermon } from "@/context/SermonContext";
+import { cn } from "@/lib/utils";
 
 interface SermonCarouselProps {
   sermons: Sermon[];
@@ -26,7 +25,7 @@ export default function SermonCarousel({
   const [api, setApi] = React.useState<any>();
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);
-  const { setCurrentSermon, setIsPlaying } = useSermon();
+  const { setCurrentSermon, setIsPlaying, toggleFavorite, isFavorite } = useSermon();
 
   React.useEffect(() => {
     if (!api) {
@@ -47,6 +46,11 @@ export default function SermonCarousel({
     setIsPlaying(true);
   };
 
+  const handleFavoriteClick = (e: React.MouseEvent, sermon: Sermon) => {
+    e.preventDefault();
+    toggleFavorite(sermon.id);
+  };
+
   return (
     <div>
       {title && <h2 className="text-2xl font-semibold text-white mb-4">{title}</h2>}
@@ -56,27 +60,46 @@ export default function SermonCarousel({
             <CarouselItem key={sermon.id}>
               <Link 
                 to={`/sermon/${sermon.id}`}
-                className="glass-card rounded-xl p-0 block overflow-hidden relative"
+                className="rounded-xl block overflow-hidden relative"
               >
-                <div className="relative w-full aspect-video">
-                  <img
-                    src={sermon.imageUrl}
-                    alt={sermon.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                  <div className="absolute bottom-0 left-0 p-4 w-full">
-                    <h3 className="text-xl font-semibold text-white mb-1">{sermon.title}</h3>
-                    <p className="text-gray-300">{sermon.preacher}</p>
+                <div className="flex flex-col">
+                  {/* Image Section */}
+                  <div className="relative w-full aspect-video">
+                    <img
+                      src={sermon.imageUrl}
+                      alt={sermon.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <button 
-                    className="absolute right-4 bottom-4"
-                    onClick={(e) => handlePlayClick(e, sermon)}
-                  >
-                    <div className="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center">
-                      <Play size={20} className="text-white ml-1" />
+                  
+                  {/* Text Section */}
+                  <div className="bg-white p-4 rounded-b-xl">
+                    <div className="flex justify-between items-start">
+                      <div className="flex-1">
+                        <h3 className="text-xl font-semibold text-gray-900">{sermon.title}</h3>
+                        <p className="text-gray-700">{sermon.preacher}</p>
+                      </div>
+                      <button
+                        className="ml-2"
+                        onClick={(e) => handleFavoriteClick(e, sermon)}
+                      >
+                        <Heart
+                          size={24}
+                          className={cn(
+                            "transition-colors duration-200",
+                            isFavorite(sermon.id) ? "fill-red-500 text-red-500" : "text-gray-400"
+                          )}
+                        />
+                      </button>
                     </div>
-                  </button>
+                    <button 
+                      className="mt-3 w-full bg-purple-600 text-white py-2 rounded-full flex items-center justify-center gap-2"
+                      onClick={(e) => handlePlayClick(e, sermon)}
+                    >
+                      <Play size={20} className="ml-1" />
+                      <span>Écouter</span>
+                    </button>
+                  </div>
                 </div>
               </Link>
             </CarouselItem>

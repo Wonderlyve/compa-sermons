@@ -28,10 +28,12 @@ const Header = () => {
             3
           </span>
         </div>
-        <Avatar className="h-9 w-9 border border-compa-600">
-          <AvatarImage src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=64&h=64&dpr=2&q=80" />
-          <AvatarFallback>UN</AvatarFallback>
-        </Avatar>
+        <Link to="/profile">
+          <Avatar className="h-9 w-9 border border-compa-600">
+            <AvatarImage src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=64&h=64&dpr=2&q=80" />
+            <AvatarFallback>UN</AvatarFallback>
+          </Avatar>
+        </Link>
         
         <Sheet>
           <SheetTrigger asChild>
@@ -44,6 +46,18 @@ const Header = () => {
               <SheetTitle>Menu</SheetTitle>
             </SheetHeader>
             <div className="space-y-4">
+              <Link 
+                to="/profile" 
+                className="block py-2 px-3 hover:bg-compa-700 rounded-md transition-colors"
+              >
+                Mon Profil
+              </Link>
+              <Link 
+                to="/favorites" 
+                className="block py-2 px-3 hover:bg-compa-700 rounded-md transition-colors"
+              >
+                Mes Favoris
+              </Link>
               {user?.isAdmin && (
                 <Link 
                   to="/dashboard" 

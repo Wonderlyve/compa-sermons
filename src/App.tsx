@@ -19,6 +19,7 @@ import Login from "@/pages/Login";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Sermons from "@/pages/Sermons";
 import Favorites from "@/pages/Favorites";
+import Profile from "@/pages/Profile";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,7 @@ const App = () => (
               <Route path="/programme" element={<Programme />} />
               <Route path="/sermons" element={<Sermons />} />
               <Route path="/favorites" element={<Favorites />} />
+              <Route path="/profile" element={<Profile />} />
               <Route path="/login" element={<Login />} />
               <Route 
                 path="/dashboard" 
