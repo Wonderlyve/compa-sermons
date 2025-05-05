@@ -6,12 +6,8 @@ import { categories } from '@/data/categories';
 
 const Categories = () => {
   return (
-    <Layout>
-      <header className="mb-8">
-        <h1 className="text-2xl font-bold text-white">Catégories</h1>
-      </header>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <Layout title="Catégories" showBackButton={true} withHeader={true}>
+      <div className="grid grid-cols-2 gap-3 mt-1">
         {categories.map((category) => (
           <CategoryCard
             key={category.id}

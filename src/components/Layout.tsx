@@ -11,6 +11,8 @@ interface LayoutProps {
   withBottomNavPadding?: boolean;
   withHeader?: boolean;
   className?: string;
+  title?: string;
+  showBackButton?: boolean;
 }
 
 const Layout = ({ 
@@ -18,18 +20,20 @@ const Layout = ({
   withPadding = true,
   withBottomNavPadding = true,
   withHeader = true,
-  className = ""
+  className = "",
+  title,
+  showBackButton = false
 }: LayoutProps) => {
   const { currentSermon } = useSermon();
   
   return (
     <div className={`min-h-screen bg-compa-800 ${className}`}>
       {withHeader && (
-        <div className={`${withPadding ? 'px-4' : ''}`}>
-          <Header />
+        <div className={`${withPadding ? 'px-3' : ''}`}>
+          <Header title={title} showBackButton={showBackButton} />
         </div>
       )}
-      <main className={`${withPadding ? 'px-4 py-2' : ''} ${withBottomNavPadding ? 'pb-20' : ''}${currentSermon ? ' pb-36' : ''}`}>
+      <main className={`${withPadding ? 'px-3 py-1' : ''} ${withBottomNavPadding ? 'pb-16' : ''}${currentSermon ? ' pb-32' : ''}`}>
         {children}
       </main>
       {currentSermon && <MiniPlayer />}

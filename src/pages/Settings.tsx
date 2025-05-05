@@ -1,135 +1,123 @@
 
 import React from 'react';
 import Layout from '@/components/Layout';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, Bell, User, Moon, Sun, Volume2, Languages, Lock, HelpCircle } from 'lucide-react';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Switch } from "@/components/ui/switch";
+import { Button } from '@/components/ui/button';
+import { Switch } from '@/components/ui/switch';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Bell, Moon, Volume2, Globe } from 'lucide-react';
 
 const Settings = () => {
   return (
-    <Layout withHeader={false}>
-      {/* Custom Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-2">
-          <Link to="/" className="text-white">
-            <ArrowLeft size={24} />
-          </Link>
-          <h1 className="text-2xl font-bold text-white">Réglages</h1>
-        </div>
-        <div className="flex items-center space-x-3">
-          <div className="relative">
-            <Bell className="text-white h-5 w-5" />
-            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-              3
-            </span>
-          </div>
-          <Link to="/profile">
-            <Avatar className="h-8 w-8 border border-compa-600">
-              <AvatarImage src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=64&h=64&dpr=2&q=80" />
-              <AvatarFallback>UN</AvatarFallback>
-            </Avatar>
-          </Link>
-        </div>
-      </div>
-
-      <div className="space-y-6">
-        {/* Account Section */}
-        <div className="bg-compa-700/50 rounded-xl p-4">
-          <h3 className="text-white text-lg font-medium mb-4">Compte</h3>
-          
-          <div className="space-y-4">
+    <Layout title="Réglages" showBackButton={true}>
+      <div className="space-y-4">
+        <Card className="bg-compa-700/50 border-compa-600">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-lg flex items-center gap-2">
+              <Bell size={18} /> Notifications
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <User className="text-gray-400" size={20} />
-                <span className="text-white">Informations personnelles</span>
+              <div>
+                <p className="text-sm text-white">Prédications</p>
+                <p className="text-xs text-gray-400">Nouvelles prédications</p>
               </div>
-              <ArrowLeft className="text-gray-400 rotate-180" size={18} />
+              <Switch checked={true} />
             </div>
             
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Bell className="text-gray-400" size={20} />
-                <span className="text-white">Notifications</span>
+              <div>
+                <p className="text-sm text-white">Radio</p>
+                <p className="text-xs text-gray-400">Émissions spéciales</p>
               </div>
-              <ArrowLeft className="text-gray-400 rotate-180" size={18} />
+              <Switch checked={false} />
             </div>
             
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Lock className="text-gray-400" size={20} />
-                <span className="text-white">Sécurité</span>
-              </div>
-              <ArrowLeft className="text-gray-400 rotate-180" size={18} />
-            </div>
-          </div>
-        </div>
-
-        {/* Preferences Section */}
-        <div className="bg-compa-700/50 rounded-xl p-4">
-          <h3 className="text-white text-lg font-medium mb-4">Préférences</h3>
-          
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Moon className="text-gray-400" size={20} />
-                <span className="text-white">Mode sombre</span>
+              <div>
+                <p className="text-sm text-white">Pain du jour</p>
+                <p className="text-xs text-gray-400">Rappels quotidiens</p>
               </div>
               <Switch />
             </div>
-            
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Volume2 className="text-gray-400" size={20} />
-                <span className="text-white">Son</span>
-              </div>
-              <ArrowLeft className="text-gray-400 rotate-180" size={18} />
-            </div>
-            
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Languages className="text-gray-400" size={20} />
-                <span className="text-white">Langue</span>
-              </div>
-              <div className="text-gray-400">Français</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Support Section */}
-        <div className="bg-compa-700/50 rounded-xl p-4">
-          <h3 className="text-white text-lg font-medium mb-4">Support</h3>
-          
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <HelpCircle className="text-gray-400" size={20} />
-                <span className="text-white">Aide</span>
-              </div>
-              <ArrowLeft className="text-gray-400 rotate-180" size={18} />
-            </div>
-            
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <span className="text-gray-400 text-sm">📝</span>
-                <span className="text-white">Conditions d'utilisation</span>
-              </div>
-              <ArrowLeft className="text-gray-400 rotate-180" size={18} />
-            </div>
-            
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <span className="text-gray-400 text-sm">🔒</span>
-                <span className="text-white">Politique de confidentialité</span>
-              </div>
-              <ArrowLeft className="text-gray-400 rotate-180" size={18} />
-            </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
         
-        {/* App Info */}
-        <div className="text-center text-gray-500 text-sm py-4">
-          <p>Compa App v1.0.0</p>
+        <Card className="bg-compa-700/50 border-compa-600">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-lg flex items-center gap-2">
+              <Volume2 size={18} /> Audio
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-white">Qualité audio</p>
+                <p className="text-xs text-gray-400">Streaming et téléchargement</p>
+              </div>
+              <Select defaultValue="high">
+                <SelectTrigger className="w-28 bg-compa-700 text-sm h-8">
+                  <SelectValue placeholder="Qualité" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="low">Basse</SelectItem>
+                  <SelectItem value="medium">Moyenne</SelectItem>
+                  <SelectItem value="high">Haute</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-white">Téléchargement auto</p>
+                <p className="text-xs text-gray-400">Favoris uniquement</p>
+              </div>
+              <Switch />
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card className="bg-compa-700/50 border-compa-600">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-lg flex items-center gap-2">
+              <Moon size={18} /> Apparence
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-white">Mode sombre</p>
+                <p className="text-xs text-gray-400">Activer le mode sombre</p>
+              </div>
+              <Switch checked={true} />
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card className="bg-compa-700/50 border-compa-600">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-lg flex items-center gap-2">
+              <Globe size={18} /> Langue
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Select defaultValue="fr">
+              <SelectTrigger className="w-full bg-compa-700 text-sm h-8">
+                <SelectValue placeholder="Langue" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="fr">Français</SelectItem>
+                <SelectItem value="en">English</SelectItem>
+              </SelectContent>
+            </Select>
+          </CardContent>
+        </Card>
+        
+        <div className="pt-2 pb-4">
+          <Button variant="outline" className="w-full text-sm" size="sm">
+            Supprimer mon compte
+          </Button>
         </div>
       </div>
     </Layout>

@@ -22,6 +22,7 @@ import Favorites from "@/pages/Favorites";
 import Profile from "@/pages/Profile";
 import Settings from "@/pages/Settings";
 import DailyBread from "@/pages/DailyBread";
+import StudyDetail from "@/pages/StudyDetail";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,7 @@ const App = () => (
               <Route path="/profile" element={<Profile />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/daily-bread" element={<DailyBread />} />
+              <Route path="/daily-bread/:id" element={<StudyDetail />} />
               <Route path="/login" element={<Login />} />
               <Route 
                 path="/dashboard" 

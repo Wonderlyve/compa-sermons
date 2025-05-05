@@ -9,8 +9,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { getSermonById } from '@/data/sermons';
 import SermonCard from '@/components/SermonCard';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 const Profile = () => {
   const { user, logout, isAuthenticated } = useAuth();
@@ -23,44 +21,36 @@ const Profile = () => {
     .slice(0, 4); // Limit to 4 for display
   
   return (
-    <Layout>
-      <div className="flex items-center gap-2 mb-6">
-        <Link to="/" className="text-gray-400">
-          <ArrowLeft size={24} />
-        </Link>
-        <h1 className="text-2xl font-bold text-white">Profil</h1>
-      </div>
-      
-      <Card className="bg-compa-700/50 border-compa-600 mb-6">
-        <CardHeader className="flex flex-row items-center gap-4">
-          <Avatar className="h-20 w-20 border-2 border-compa-500">
+    <Layout title="Profil" showBackButton={true}>
+      <Card className="bg-compa-700/50 border-compa-600 mb-4">
+        <CardHeader className="flex flex-row items-center gap-4 py-3">
+          <Avatar className="h-16 w-16 border-2 border-compa-500">
             <AvatarImage src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&h=120&dpr=2&q=80" />
             <AvatarFallback>UN</AvatarFallback>
           </Avatar>
           <div>
-            <CardTitle className="text-white text-xl">
+            <CardTitle className="text-white text-base">
               {isAuthenticated ? user?.email : 'Utilisateur'}
             </CardTitle>
-            <p className="text-gray-300 mt-1">
+            <p className="text-xs text-gray-300 mt-1">
               {isAuthenticated ? 'Compte administrateur' : 'Membre'}
             </p>
           </div>
         </CardHeader>
-        <CardContent className="pb-6">
+        <CardContent className="pb-4">
           {isAuthenticated ? (
             <Button 
               variant="destructive" 
-              className="mt-4" 
+              className="mt-2" 
+              size="sm"
               onClick={logout}
             >
               Déconnexion
             </Button>
           ) : (
-            <Link to="/login">
-              <Button variant="default" className="mt-4">
-                Connexion
-              </Button>
-            </Link>
+            <Button variant="default" className="mt-2" size="sm">
+              Connexion
+            </Button>
           )}
         </CardContent>
       </Card>
@@ -70,10 +60,10 @@ const Profile = () => {
           <TabsTrigger value="favorites">Favoris</TabsTrigger>
           <TabsTrigger value="history">Historique</TabsTrigger>
         </TabsList>
-        <TabsContent value="favorites" className="mt-6">
+        <TabsContent value="favorites" className="mt-4">
           {favoriteSermons.length > 0 ? (
             <>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3">
                 {favoriteSermons.map(sermon => (
                   <SermonCard
                     key={sermon.id}
@@ -84,26 +74,22 @@ const Profile = () => {
                   />
                 ))}
               </div>
-              <Link to="/favorites" className="block mt-4 text-center">
-                <Button variant="outline" className="w-full">
-                  Voir tous les favoris
-                </Button>
-              </Link>
+              <Button variant="outline" className="w-full mt-3" size="sm">
+                Voir tous les favoris
+              </Button>
             </>
           ) : (
-            <div className="text-center py-8">
-              <p className="text-gray-400">Vous n'avez pas encore de favoris</p>
-              <Link to="/">
-                <Button variant="outline" className="mt-4">
-                  Découvrir des prédications
-                </Button>
-              </Link>
+            <div className="text-center py-6">
+              <p className="text-sm text-gray-400">Vous n'avez pas encore de favoris</p>
+              <Button variant="outline" className="mt-3" size="sm">
+                Découvrir des prédications
+              </Button>
             </div>
           )}
         </TabsContent>
-        <TabsContent value="history" className="mt-6">
-          <div className="text-center py-8">
-            <p className="text-gray-400">Historique d'écoute à venir</p>
+        <TabsContent value="history" className="mt-4">
+          <div className="text-center py-6">
+            <p className="text-sm text-gray-400">Historique d'écoute à venir</p>
           </div>
         </TabsContent>
       </Tabs>

@@ -35,7 +35,7 @@
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
     
-    --radius: 0.75rem;
+    --radius: 0.5rem;
   }
 }
 
@@ -51,6 +51,27 @@
 
   html {
     @apply scroll-smooth;
+  }
+  
+  /* Mobile-first prose styling for Bible study content */
+  .prose {
+    @apply text-gray-300;
+  }
+  
+  .prose h2 {
+    @apply text-white text-lg font-semibold mt-4 mb-2;
+  }
+  
+  .prose p {
+    @apply text-sm mb-3;
+  }
+  
+  .prose ul {
+    @apply list-disc pl-5 mb-3;
+  }
+  
+  .prose ul li {
+    @apply text-sm mb-1;
   }
 }
 
@@ -77,5 +98,25 @@
   }
   .no-scrollbar::-webkit-scrollbar {
     display: none;
+  }
+  
+  /* Aspect ratio for sermon carousel images */
+  .aspect-21-9 {
+    aspect-ratio: 21/9;
+    height: 140px;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+/* Container width constraints */
+.container {
+  @apply px-3 mx-auto;
+  max-width: 640px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
   }
 }
