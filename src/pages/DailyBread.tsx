@@ -91,7 +91,7 @@ const DailyBread = () => {
       </div>
       
       <h3 className="text-white font-semibold text-sm mb-3">Études précédentes</h3>
-      <div className="space-y-3">
+      <div className="space-y-4">
         {dailyStudies.slice(1).map(study => (
           <Link key={study.id} to={`/daily-bread/${study.id}`}>
             <Card className="bg-compa-700/50 border-compa-600 overflow-hidden">

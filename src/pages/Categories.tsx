@@ -7,7 +7,7 @@ import { categories } from '@/data/categories';
 const Categories = () => {
   return (
     <Layout title="Catégories" showBackButton={true} withHeader={true}>
-      <div className="grid grid-cols-2 gap-3 mt-1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-1">
         {categories.map((category) => (
           <CategoryCard
             key={category.id}
@@ -15,6 +15,7 @@ const Categories = () => {
             name={category.name}
             imageUrl={category.imageUrl}
             count={category.count}
+            className="w-full"
           />
         ))}
       </div>

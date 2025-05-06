@@ -67,17 +67,15 @@ const recentEvents: Event[] = [
 
 const Programme = () => {
   return (
-    <Layout>
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-white mb-4">Programme</h1>
-        
+    <Layout title="Programme" showBackButton={true} withHeader={true}>
+      <div className="mb-4">
         <Tabs defaultValue="upcoming" className="w-full">
-          <TabsList className="grid grid-cols-2 mb-6">
+          <TabsList className="grid grid-cols-2 mb-4">
             <TabsTrigger value="upcoming">À venir</TabsTrigger>
             <TabsTrigger value="past">Passés</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="upcoming" className="space-y-4">
+          <TabsContent value="upcoming" className="space-y-3">
             <div className="overflow-hidden">
               <div className="flex overflow-x-auto space-x-4 pb-4 no-scrollbar snap-x snap-mandatory">
                 {upcomingEvents.map((event) => (
@@ -89,19 +87,19 @@ const Programme = () => {
                       <img 
                         src={event.imageUrl} 
                         alt={event.title}
-                        className="w-full h-40 object-cover"
+                        className="w-full h-36 object-cover"
                       />
-                      <div className="p-4">
-                        <h3 className="font-semibold text-white text-lg">{event.title}</h3>
+                      <div className="p-3">
+                        <h3 className="font-semibold text-white text-base">{event.title}</h3>
                         <div className="flex items-center text-gray-400 mt-2">
-                          <Calendar size={16} className="mr-2" />
-                          <span>{event.date}</span>
+                          <Calendar size={14} className="mr-1" />
+                          <span className="text-xs">{event.date}</span>
                         </div>
                         <div className="flex items-center text-gray-400 mt-1">
-                          <Clock size={16} className="mr-2" />
-                          <span>{event.time}</span>
+                          <Clock size={14} className="mr-1" />
+                          <span className="text-xs">{event.time}</span>
                         </div>
-                        <p className="mt-3 text-sm text-gray-300">{event.description}</p>
+                        <p className="mt-2 text-xs text-gray-300 line-clamp-2">{event.description}</p>
                       </div>
                     </div>
                   </div>
@@ -109,29 +107,29 @@ const Programme = () => {
               </div>
             </div>
             
-            <h2 className="text-xl font-semibold text-white mt-8 mb-4">Tous les événements</h2>
+            <h2 className="text-base font-semibold text-white mt-6 mb-2">Tous les événements</h2>
             
-            <div className="space-y-4">
+            <div className="space-y-3">
               {upcomingEvents.map((event) => (
                 <div 
                   key={event.id}
-                  className="glass-card rounded-lg p-3 flex gap-3"
+                  className="glass-card rounded-lg p-2 flex gap-3"
                 >
-                  <div className="w-1/3">
+                  <div className="w-1/4">
                     <img 
                       src={event.imageUrl} 
                       alt={event.title}
-                      className="w-full h-24 object-cover rounded-md"
+                      className="w-full h-16 object-cover rounded-md"
                     />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-medium text-white">{event.title}</h3>
-                    <div className="flex items-center text-gray-400 text-sm mt-1">
-                      <Calendar size={14} className="mr-1" />
+                    <h3 className="font-medium text-white text-sm">{event.title}</h3>
+                    <div className="flex items-center text-gray-400 text-xs mt-1">
+                      <Calendar size={12} className="mr-1" />
                       <span>{event.date}</span>
                     </div>
-                    <div className="flex items-center text-gray-400 text-sm mt-1">
-                      <Clock size={14} className="mr-1" />
+                    <div className="flex items-center text-gray-400 text-xs mt-1">
+                      <Clock size={12} className="mr-1" />
                       <span>{event.time}</span>
                     </div>
                   </div>
@@ -140,28 +138,28 @@ const Programme = () => {
             </div>
           </TabsContent>
           
-          <TabsContent value="past" className="space-y-4">
-            <div className="space-y-4">
+          <TabsContent value="past" className="space-y-3">
+            <div className="space-y-3">
               {recentEvents.map((event) => (
                 <div 
                   key={event.id}
-                  className="glass-card rounded-lg p-3 flex gap-3"
+                  className="glass-card rounded-lg p-2 flex gap-3"
                 >
-                  <div className="w-1/3">
+                  <div className="w-1/4">
                     <img 
                       src={event.imageUrl} 
                       alt={event.title}
-                      className="w-full h-24 object-cover rounded-md opacity-75"
+                      className="w-full h-16 object-cover rounded-md opacity-75"
                     />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-medium text-white">{event.title}</h3>
-                    <div className="flex items-center text-gray-400 text-sm mt-1">
-                      <Calendar size={14} className="mr-1" />
+                    <h3 className="font-medium text-white text-sm">{event.title}</h3>
+                    <div className="flex items-center text-gray-400 text-xs mt-1">
+                      <Calendar size={12} className="mr-1" />
                       <span>{event.date}</span>
                     </div>
-                    <div className="flex items-center text-gray-400 text-sm mt-1">
-                      <Clock size={14} className="mr-1" />
+                    <div className="flex items-center text-gray-400 text-xs mt-1">
+                      <Clock size={12} className="mr-1" />
                       <span>{event.time}</span>
                     </div>
                   </div>

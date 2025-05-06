@@ -15,12 +15,14 @@ interface SermonCarouselProps {
   sermons: Sermon[];
   title?: string;
   featured?: boolean;
+  showPlayButton?: boolean;
 }
 
 export default function SermonCarousel({ 
   sermons, 
   title,
-  featured = false 
+  featured = false,
+  showPlayButton = true
 }: SermonCarouselProps) {
   const [api, setApi] = React.useState<any>();
   const [current, setCurrent] = React.useState(0);
@@ -74,7 +76,7 @@ export default function SermonCarousel({
                     />
                     
                     {/* Play and Favorite buttons for homepage only */}
-                    {isHomePage && (
+                    {isHomePage && showPlayButton && (
                       <div className="absolute bottom-4 right-4 flex items-center space-x-2">
                         <button
                           className="bg-white/90 rounded-full p-2 shadow-lg"

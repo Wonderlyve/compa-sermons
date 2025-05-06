@@ -7,8 +7,8 @@ import { recentRadioSermons } from '@/data/sermons';
 
 const Radio = () => {
   return (
-    <Layout title="Radio en direct" showBackButton={true}>
-      <div className="mb-4">
+    <Layout title="Radio en direct" showBackButton={true} withHeader={true}>
+      <div className="mb-3">
         <RadioPlayer 
           streamUrl="https://stream.radio.co/s5c5da6a36/listen"
           title="Compa Radio"
@@ -16,7 +16,7 @@ const Radio = () => {
         />
       </div>
       
-      <div className="mt-5">
+      <div className="mt-4">
         <SermonCarousel
           title="Récemment diffusé"
           sermons={recentRadioSermons}
